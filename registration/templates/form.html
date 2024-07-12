@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container">
+    {% if page == 'register' %}
+    <div class="sign-up form-holder">
+        <div class="form">
+            <div class="header">
+                <h2>Sign Up</h2>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <label for="forinput">{{field.label}}</label>
+                {{field}}
+                {% endfor %}
+                <div class="auth_action">
+                    <p>Do you have an account? <a href={% url "log-in" %}>Log-in</a></p>    
+                    <input type="submit" value="submit" class="submit">
+                </div>
+            </form>
+
+        </div>
+    </div>
+    {% else %}
+    <div class="sign-in form-holder">
+        <div class="form">
+            <div class="header">
+                <h2>Log In</h2>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <label for="forinput">Username</label>
+                <input type="text" name="username" placeholder="Enter username...">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="********">
+                <div class="auth_action">
+                    <p>Don't have an account? <a href="{% url "register" %}">Sign Up</a></p>    
+                    <input type="submit" value="submit" class="submit">
+                </div>
+            </form>
+
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}
